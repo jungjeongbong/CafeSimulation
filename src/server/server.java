@@ -1,4 +1,5 @@
 package server;
-public class server {
+
+public class Server {
 
 }

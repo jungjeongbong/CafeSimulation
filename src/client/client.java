@@ -1,9 +1,4 @@
 package client;
-
-
-public class client {
-
-	public void sendMenu() {
-		
-	}
+public class Client {
+	
 }
