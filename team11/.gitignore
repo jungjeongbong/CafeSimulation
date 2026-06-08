@@ -1,0 +1,17 @@
+# IDE
+.idea/
+*.iml
+.vscode/
+*.classpath
+*.project
+
+# Compiled
+*.class
+out/
+
+# JAR (제출용만 포함, 빌드 중간 파일 제외)
+!cafe-system.jar
+
+# DB 연결 정보 (보안)
+db.properties
+config.properties
