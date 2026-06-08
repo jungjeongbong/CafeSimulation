@@ -3,21 +3,20 @@ package client;
 import client.controller.OrderController;
 
 public class ClientTest {
-
-	private static OrderController orderController;
-	
-	public static void startOrder(String ip) {
-		Client client = new Client();
-		client.connect(ip, 3306);
-		client.listen();
-		
-		client.setOrderController(orderController);
-		orderController.setClient(client);
-	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		orderController = new OrderController();
-	}
-
+    public static void startOrder(String ip, OrderController orderController) {
+        Client client = new Client();
+        
+        client.setOrderController(orderController);
+        orderController.setClient(client);
+        
+        client.connect(ip, 50001); 
+        client.listen();
+    }
+    
+    public static void main(String[] args) {
+        OrderController orderController = new OrderController();
+        
+        startOrder("localhost", orderController);
+        orderController.login();
+    }
 }

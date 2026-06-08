@@ -17,6 +17,11 @@ public class ConnectionController extends Thread implements MessageSender{
 	private BufferedReader in;
 	private PrintWriter out;
 	private Customer customer;
+	private OrderRoom orderRoom;
+	
+	public void setOrderRoom(OrderRoom orderRoom) {
+	    this.orderRoom = orderRoom;
+	}
 	
 	public ConnectionController(Socket socket, Server server) {
 		this.socket = socket;
@@ -37,27 +42,32 @@ public class ConnectionController extends Thread implements MessageSender{
 		customer.setMessageSender(this);
 	}
 	
+	@Override
 	public void run() {
-		String msg;
-		try {
-			String name = in.readLine();
-			String[] tokens = name.split(":");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	    try {
+
+	        String msg;
+
+	        while((msg = in.readLine()) != null) {
+
+	            System.out.println("수신 : " + msg);
+
+	            if(msg.startsWith("ORDER:")) {
+
+	                System.out.println(
+	                    "주문 수신 : " + msg);
+	            }
+	        }
+
+	    } catch(IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 	@Override
 	public void send(String msg) {
-		// TODO Auto-generated method stub
-		System.out.println(msg);
-		out.println(msg);
+	    out.println(msg);
+	    out.flush();
 	}
-
-	public void setOrderRoom(OrderRoom orderRoom) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

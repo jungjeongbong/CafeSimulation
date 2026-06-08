@@ -32,7 +32,7 @@ public class Server extends Thread{
 		makeOrderRoom();
 		
 		try {
-			serverSocket = new ServerSocket(3306);
+			serverSocket = new ServerSocket(50001);
 		
 			while(true) {
 				System.out.println("주문 서버 연결 대기중");

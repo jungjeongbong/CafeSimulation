@@ -22,5 +22,24 @@ public class OrderRoom {
 			c.send(msg);
 		}
 	}
+	
+	public void setCustomer(Customer customer) {
+	    this.customer = customer;
+	}
 
+	public Customer getCustomer() {
+	    return customer;
+	}
+	
+	public void printCustomer() {
+
+	    if (customer == null) {
+	        System.out.println("고객 없음");
+	        return;
+	    }
+
+	    System.out.println(
+	            "현재 고객 : "
+	            + customer.getName());
+	}
 }

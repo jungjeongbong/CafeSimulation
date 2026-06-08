@@ -12,9 +12,9 @@ import server.controller.ConnectionController;
 import server.domain.Customer;
 
 public class CheckAlreadyInDB {
-	public boolean availableNumber(Customer customer, ConnectionController session, int msg) {
+	public boolean availableNumber(String phoneNumber) {
 
-		String newPhoneNumber = customer.getPhoneNumber();
+		String newPhoneNumber = phoneNumber;
 
 		String selectSql =
 				"SELECT EXISTS (SELECT * FROM customer WHERE phone_number = ?) AS is_exist";

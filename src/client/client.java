@@ -14,7 +14,7 @@ public class Client {
 	private OrderController orderController;
 	
 	public void send(String msg) {
-		out.print(msg);
+		out.println(msg);
 		out.flush();
 	}
 	
@@ -62,7 +62,6 @@ public class Client {
 	}
 
 	public void setOrderController(OrderController orderController) {
-		// TODO Auto-generated method stub
-		
+	    this.orderController = orderController;
 	}
 }

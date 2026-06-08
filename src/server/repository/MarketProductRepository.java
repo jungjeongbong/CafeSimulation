@@ -1,6 +1,7 @@
 package server.repository;
 
 import server.domain.Customer;
+import server.controller.Product;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -90,5 +91,35 @@ public class MarketProductRepository {
 			System.out.println("상품 가격 변경 실패");
 			e.printStackTrace();
 		}
+	}
+	
+	public Product findProductById(int productId) {
+
+	    String sql =
+	        "SELECT * FROM product WHERE product_id = ?";
+
+	    try (Connection conn = DBConnector.connectDB();
+	         PreparedStatement pstmt =
+	             conn.prepareStatement(sql)) {
+
+	        pstmt.setInt(1, productId);
+
+	        ResultSet rs = pstmt.executeQuery();
+
+	        if(rs.next()) {
+
+	            return new Product(
+	                rs.getInt("product_id"),
+	                rs.getString("product_name"),
+	                rs.getString("category"),
+	                rs.getInt("unit_price")
+	            );
+	        }
+
+	    } catch(SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return null;
 	}
 }

@@ -1,8 +1,34 @@
 package server.controller;
 
 public class Product {
-	public int productID;
-	public String productName;
-	public String category;
-	public int unitPrice;
+
+    private int productID;
+    private String productName;
+    private String category;
+    private int unitPrice;
+
+    public Product() {}
+
+    public Product(int productID, String productName, String category, int unitPrice) {
+        this.productID = productID;
+        this.productName = productName;
+        this.category = category;
+        this.unitPrice = unitPrice;
+    }
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
+    }
 }

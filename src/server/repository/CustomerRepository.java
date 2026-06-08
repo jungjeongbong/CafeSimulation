@@ -13,12 +13,13 @@ public class CustomerRepository {
 		
 		System.out.println("고객 레포지토리 DB 연결 성공");
 	}
-	public Customer findPlayerByName(String name) {
-		String sql = "";
+	public Customer findCustomerByName(String name) {
+		String sql =
+			    "SELECT * FROM customer WHERE name = ?";
 		Customer customer = null;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);){
-			pstmt.setString(0, sql);
+			pstmt.setString(1, name);
 			
 			try(ResultSet rs = pstmt.executeQuery()){
 				if (rs.next()) {
@@ -35,5 +36,46 @@ public class CustomerRepository {
 			e.printStackTrace();
 		}
 		return customer;
+	}
+	
+	public Customer findCustomerByPhone(String phoneNumber) {
+
+	    String sql =
+	        "SELECT * FROM customer WHERE phone_number = ?";
+
+	    Customer customer = null;
+
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setString(1, phoneNumber);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+
+	            if (rs.next()) {
+
+	                customer = new Customer();
+
+	                customer.setCustomerID(
+	                    rs.getInt("customer_id"));
+
+	                customer.setName(
+	                    rs.getString("name"));
+
+	                customer.setPhoneNumber(
+	                    rs.getString("phone_number"));
+
+	                customer.setCity(
+	                    rs.getString("city"));
+
+	                customer.setAge(
+	                    rs.getInt("age"));
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return customer;
 	}
 }
