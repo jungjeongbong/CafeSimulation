@@ -1,6 +1,7 @@
 package server.domain;
 
 import server.MessageSender;
+import server.controller.ConnectionController;
 import server.repository.CustomerRepository;
 
 public class Customer {
@@ -52,6 +53,11 @@ public class Customer {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public void setMessageSender(ConnectionController connectionController) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

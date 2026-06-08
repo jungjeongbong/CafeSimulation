@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class DBConnector {
 	//여기에 DB주소랑 비번 등 넣기
 	private static final String DB_URL = "";
-	private static final String DB_USERNAME="";
-	private static final String DB_PASSWORD = "";
+	private static final String DB_USERNAME="root";
+	private static final String DB_PASSWORD = "root";
 	
 	public static Connection connectDB() {
 		Connection conn = null;
