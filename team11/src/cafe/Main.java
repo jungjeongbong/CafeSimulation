@@ -19,9 +19,10 @@ public class Main {
 
         while (true) {
             System.out.println("\n========== MAIN MENU ==========");
-            System.out.println("1. Product Management (상품 관리)");
-            System.out.println("2. Store Management   (매장 관리)");
-            System.out.println("3. Order & Analysis   (주문/분석)");
+            System.out.println("1. Product Management  (상품 관리)");
+            System.out.println("2. Customer Management (고객 관리)");
+            System.out.println("3. Store Management    (매장 관리)");
+            System.out.println("4. Order & Analysis    (주문/분석)");
             System.out.println("0. Exit");
             System.out.println("================================");
             System.out.print("Select an option: ");
@@ -34,10 +35,14 @@ public class Main {
                     productMenu.showMenu();
                     break;
                 case "2":
+                    CustomerMenu customerMenu = new CustomerMenu(scanner);
+                    customerMenu.showMenu();
+                    break;
+                case "3":
                     StoreMenu storeMenu = new StoreMenu(scanner);
                     storeMenu.showMenu();
                     break;
-                case "3":
+                case "4":
                     SalesMenu salesMenu = new SalesMenu(scanner);
                     salesMenu.showMenu();
                     break;
