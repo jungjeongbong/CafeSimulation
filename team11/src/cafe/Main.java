@@ -21,7 +21,7 @@ public class Main {
             System.out.println("\n========== MAIN MENU ==========");
             System.out.println("1. Product Management (상품 관리)");
             System.out.println("2. Store Management   (매장 관리)");
-            System.out.println("3. Order Management   (주문 관리)");  // 정유민 - 추가 예정
+            System.out.println("3. Order & Analysis   (주문/분석)");
             System.out.println("0. Exit");
             System.out.println("================================");
             System.out.print("Select an option: ");
@@ -38,8 +38,8 @@ public class Main {
                     storeMenu.showMenu();
                     break;
                 case "3":
-                    // TODO: 정유민 SalesMenu 완성 후 연결
-                    System.out.println("[준비 중] 주문 관리 기능은 곧 추가됩니다.");
+                    SalesMenu salesMenu = new SalesMenu(scanner);
+                    salesMenu.showMenu();
                     break;
                 case "0":
                     System.out.println("Exiting system. Goodbye!");
