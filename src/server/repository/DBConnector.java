@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DBConnector {
 	//여기에 DB주소랑 비번 등 넣기
-	private static final String DB_URL = "";
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/cafesimulation?serverTimezone=Asia/Seoul&useSSL=false";
 	private static final String DB_USERNAME="root";
-	private static final String DB_PASSWORD = "root";
+	private static final String DB_PASSWORD = "LastForever0408!";
 	
 	public static Connection connectDB() {
 		Connection conn = null;

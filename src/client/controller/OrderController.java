@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import client.Client;
-import client.ClientTest;
 import server.service.*;
 import server.controller.ConnectionController;
 import server.controller.Product;
@@ -30,9 +29,21 @@ public class OrderController {
     private CustomerService customerService;
     
     public OrderController() {
+
+        System.out.println("OrderController 생성");
+
         this.customerService = new CustomerService();
         this.checkService = new CheckAlreadyInDB();
         this.basket = new Basket();
+
+        client = new Client();
+
+        client.setOrderController(this);
+        setClient(client);
+
+        client.connect("localhost", 50002);
+
+        client.listen();
     }
     
     public void login() {
@@ -199,26 +210,34 @@ public class OrderController {
     }
     private void completeOrder() {
 
-        if(client == null) {
+        if(client == null || customer == null) {
             return;
         }
 
-        StringBuilder sb =
-            new StringBuilder();
+        int storeId = 1; // 임시
 
-        sb.append("ORDER:");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("ORDER:")
+          .append(customer.getCustomerID())
+          .append(":")
+          .append(storeId)
+          .append(":");
 
         for(int i=0;i<basket.getProducts().size();i++) {
 
             Product p = basket.getProducts().get(i);
 
-            sb.append(p.getProductID()).append(",").append(basket.getProduct_number().get(i)).append(";");
-
+            sb.append(p.getProductID())
+              .append(",")
+              .append(basket.getProduct_number().get(i))
+              .append(";");
         }
 
         client.send(sb.toString());
 
-        System.out.println(
-            "주문이 서버로 전송되었습니다.");
+        System.out.println("주문이 서버로 전송되었습니다.");
     }
+    
+    
 }

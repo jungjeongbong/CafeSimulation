@@ -49,15 +49,12 @@ public class Basket {
 
 	    System.out.println("===== 장바구니 =====");
 
-	    for(int i=0;i<getProducts().size();i++) {
-
-	        Product p = getProducts().get(i);
+	    for(int i = 0; i < products.size(); i++) {
 
 	        System.out.println(
-	            p.getProductName()
+	            products.get(i).getProductName()
 	            + " x "
-	            + getProduct_number().get(i)
-	        );
+	            + product_number.get(i));
 	    }
 
 	    System.out.println(

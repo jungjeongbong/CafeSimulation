@@ -15,6 +15,25 @@ public class Product {
         this.category = category;
         this.unitPrice = unitPrice;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) return true;
+
+        if (obj == null ||
+            getClass() != obj.getClass())
+            return false;
+
+        Product other = (Product) obj;
+
+        return productID == other.productID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(productID);
+    }
 
     public int getProductID() {
         return productID;

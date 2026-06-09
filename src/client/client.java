@@ -42,6 +42,9 @@ public class Client {
 			in = new BufferedReader(input);
 			OutputStreamWriter output = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8);
 			out = new PrintWriter(output, true);
+			
+			System.out.println("서버 연결 성공");
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,6 +3,7 @@ package server.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import server.repository.DBConnector;
@@ -20,7 +21,7 @@ public class AnalizeService {
 			try (PreparedStatement pstmt = conn.prepareStatement(timeSql);
 				ResultSet rs = pstmt.executeQuery()){
 				System.out.println("-----------------------시간대별 주문량------------------------");
-				System.out.println(rs);
+				printResultSet(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println("시간대별 주문량 조회 실패");
@@ -42,7 +43,7 @@ public class AnalizeService {
 			try (PreparedStatement pstmt = conn.prepareStatement(timeCategorySql);
 				ResultSet rs = pstmt.executeQuery()){
 				System.out.println("-----------------------시간대별 카테고리 주문량------------------------");
-				System.out.println(rs);
+				printResultSet(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println("시간대별 카테고리 주문량 조회 실패");
@@ -70,7 +71,7 @@ public class AnalizeService {
 			try (PreparedStatement pstmt = conn.prepareStatement(ageSql);
 				ResultSet rs = pstmt.executeQuery()){
 				System.out.println("-----------------------연령대별 주문량------------------------");
-				System.out.println(rs);
+				printResultSet(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println("연령대별 주문량 및 카테고리 조회 실패");
@@ -91,7 +92,7 @@ public class AnalizeService {
 			try (PreparedStatement pstmt = conn.prepareStatement(categorySql);
 				ResultSet rs = pstmt.executeQuery()){
 				System.out.println("-----------------------카테고리별 총 매출------------------------");
-				System.out.println(rs);
+				printResultSet(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println("카테고리별 총 매출 조회 실패");
@@ -111,7 +112,7 @@ public class AnalizeService {
 			try (PreparedStatement pstmt = conn.prepareStatement(storeSql);
 				ResultSet rs = pstmt.executeQuery()){
 				System.out.println("-----------------------지점별 총 매출------------------------");
-				System.out.println(rs);
+				printResultSet(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println("지점별 총 매출 조회 실패");
@@ -132,7 +133,7 @@ public class AnalizeService {
 			try (PreparedStatement pstmt = conn.prepareStatement(sumSql);
 				ResultSet rs = pstmt.executeQuery()){
 				System.out.println("-----------------------고객별 총 구매액------------------------");
-				System.out.println(rs);
+				printResultSet(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println("고객별 총 구매액 조회 실패");
@@ -172,7 +173,7 @@ public class AnalizeService {
 			try (PreparedStatement pstmt = conn.prepareStatement(customerSql);
 				ResultSet rs = pstmt.executeQuery()){
 				System.out.println("-----------------------고객 정보 변경 전후 판매 분석------------------------");
-				System.out.println(rs);
+				printResultSet(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println("고객 정보 변경 전후 판매 분석 실패");
@@ -210,11 +211,43 @@ public class AnalizeService {
 			try (PreparedStatement pstmt = conn.prepareStatement(priceSql);
 				ResultSet rs = pstmt.executeQuery()){
 				System.out.println("-----------------------가격 변경 전후 판매 분석------------------------");
-				System.out.println(rs);
+				printResultSet(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println("가격 변경 전후 판매 분석 실패");
 			e.printStackTrace();
 		}
+	}
+	private void printResultSet(ResultSet rs) throws SQLException {
+
+	    ResultSetMetaData meta = rs.getMetaData();
+
+	    int columnCount = meta.getColumnCount();
+
+	    // 컬럼명 출력
+	    for (int i = 1; i <= columnCount; i++) {
+	        System.out.printf("%-20s", meta.getColumnLabel(i));
+	    }
+	    System.out.println();
+
+	    // 구분선
+	    for (int i = 1; i <= columnCount; i++) {
+	        System.out.print("--------------------");
+	    }
+	    System.out.println();
+
+	    // 데이터 출력
+	    while (rs.next()) {
+
+	        for (int i = 1; i <= columnCount; i++) {
+
+	            Object value = rs.getObject(i);
+
+	            System.out.printf("%-20s",
+	                value == null ? "NULL" : value.toString());
+	        }
+
+	        System.out.println();
+	    }
 	}
 }
